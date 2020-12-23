@@ -1,0 +1,38 @@
+# Get all users
+# GET http://localhost:7000/api/users
+
+# remove user
+# DELETE http://localhost:7000/api/users/remove/5fa1bfb4449b4717902009f4
+
+# # create user
+# POST  http://localhost:7000/api/users
+# Content-Type: application/json
+
+# {
+#   "name": "Precious Adeyinka",
+#   "email": "aprecious0003@gmail.com",
+#   "password": "PreciousAdeyinka0003!!!"
+# }
+
+# {
+#   "name": "Prince Bright",
+#   "email": "princebright080@gmail.com",
+#   "password": "PrinceBright003!!!"
+# }
+
+# authenticate user
+# POST  http://localhost:7000/api/users/authenticate
+# Content-Type: application/json
+
+# {
+#   "email": "aprecious0003@gmail.com",
+#   "password": "PreciousAdeyinka0003!!!"
+# }
+
+# {
+#   "email": "princebright080@gmail.com",
+#   "password": "PrinceBright003!!!"
+# }
+
+# Get all products
+GET http://localhost:7000/api/products

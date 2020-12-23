@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+</head>
+<body>
+  <form>
+    <input type="text" id="todoValue" />
+    <button id="addTodo">Add</button>
+    <ul id="container"></ul>
+  </form>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.0.5/redux.min.js" integrity="sha512-P36ourTueX/PrXrD4Auc1kVLoTE7bkWrIrkaM0IG2X3Fd90LFgTRogpZzNBssay0XOXhrIgudf4wFeftdsPDiQ==" crossorigin="anonymous"></script>
+  <script>
+    var reducer = Redux.combineReducers({
+      todos: (state=[], action) => {
+        var newState = Object.assign([], state);
+        if (action.type == 'add') {
+          newState.push(action.item);
+        }
+        if (action.type == 'remove') {
+          newState.splice(action.index, 1);
+        }
+        return newState;
+      }
+    });
+
+    var store = Redux.createStore(reducer);
+    
+    var render = () => {
+      var container = document.querySelector('#container');
+      container.innerHTML = '';
+      
+      var state = store.getState();
+      
+      state.todos.forEach((todo, i)=> {
+        var e = document.createElement('li');
+        e.innerHTML = todo
+        e.onclick = () => {
+          store.dispatch({
+            type: 'remove',
+            index: i
+          })
+          render();
+        }
+        container.appendChild(e);
+      });
+    }
+    render();
+    
+    document.querySelector('#addTodo').onclick = () => {
+      store.dispatch({
+        type: 'add',
+        item: document.querySelector('#todoValue').value.trim()
+      })
+      render();
+      document.querySelector('#todoValue').value = '';
+    }
+  </script>
+  </body>
+</html>
